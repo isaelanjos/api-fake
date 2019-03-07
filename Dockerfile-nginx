@@ -1,0 +1,47 @@
+# Isael Anjos
+# Simple builder php with node and nginx server
+
+# Use composer
+FROM composer as composer
+
+# Define workdir
+WORKDIR /app
+
+# Copy app files
+COPY ./ /app
+
+# Run composer install
+RUN composer install --ignore-platform-reqs
+
+# User node
+FROM node:8.11.4 as node
+
+# Define workdir
+WORKDIR /app
+
+# Copy app files from composer container(build)
+COPY --from=composer /app .
+
+RUN npm install apidoc -g
+RUN apidoc -c ./ -i ./routes -o ./public/rest-api-docs
+
+# Use Nginx 1.14
+FROM nginx:1.14-alpine as nginx
+
+# Define workdir
+WORKDIR /app
+
+# Copy app files from composer container(build)
+COPY --from=node /app .
+
+# Delete all nginx config files
+RUN rm -rf /etc/nginx/conf.d/*
+
+# Copy nginx custom config file
+COPY ./docker/nginx.conf /etc/nginx/conf.d/nginx.conf
+
+# Expose web ports
+EXPOSE 80 443
+
+# Start nginx
+CMD ["nginx", "-g", "daemon off;"]

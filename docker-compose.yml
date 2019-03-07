@@ -1,0 +1,70 @@
+version: '3'
+
+services:
+
+  nginx:
+    build:
+      context: ./
+      dockerfile: Dockerfile-nginx
+    ports:
+      - 8888:80
+      - 8899:8080
+    depends_on:
+      - php
+
+  php:
+    build:
+      context: ./
+      dockerfile: Dockerfile-php
+
+#  mongo:
+#    build:
+#      context: ./mongo
+#      dockerfile: Dockerfile
+#    container_name: mongo
+#    env_file: .env
+#    hostname: docker-mongo
+#    image: isaelanjos/mongo
+#    ports:
+#      - ${MONGO_PORT}
+#    restart: always
+#    volumes:
+#      - ./mongo/data:/data/db
+#      - ./mongo/dump:/dump
+#      - ./mongo/entrypoint:/docker-entrypoint-initdb.d
+#      - ./mongo/log:/var/log/mongodb
+#
+#  mysql:
+#    build:
+#      context: ./mysql
+#      dockerfile: Dockerfile
+#    container_name: mysql
+#    env_file: .env
+#    hostname: docker-mysql
+#    image: isaelanjos/mysql
+#    ports:
+#      - ${MYSQL_PORT}
+#    restart: always
+#    volumes:
+#      - ./mysql/conf/mysqld.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf
+#      - ./mysql/data:/var/lib/mysql
+#      - ./mysql/entrypoint:/docker-entrypoint-initdb.d
+#      - ./mysql/log:/var/log/mysql
+#    environment:
+#      MYSQL_ALLOW_EMPTY_PASSWORD: ${MYSQL_ALLOW_EMPTY_PASSWORD}
+#      MYSQL_DATABASE: ${MYSQL_DATABASE}
+#      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+#      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+#      MYSQL_USER: ${MYSQL_USER}
+#
+#  redis:
+#    build:
+#      context: ./redis
+#      dockerfile: Dockerfile
+#    container_name: redis
+#    env_file: .env
+#    hostname: docker-redis
+#    image: isaelanjos/redis
+#    ports:
+#      - ${REDIS_PORT}
+#    restart: always
