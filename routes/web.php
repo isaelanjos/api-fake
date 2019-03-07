@@ -17,7 +17,7 @@
 
 
 /**
- * @api {get} /
+ * @api {get} / Página inicial
  * @apiGroup Basic
  * @apiDescription Teste da pagina inicial.
  *
@@ -36,7 +36,7 @@ $router->get(URL_INDEX, 'Controller@index');
 
 
 /**
- * @api {get} /version
+ * @api {get} /version Obter número da versão
  * @apiGroup Basic
  * @apiDescription Obtem o número da versão atual da API.
  *
@@ -55,7 +55,7 @@ $router->get(URL_APP_VERSION_NUMBER, 'Controller@appVersionNumber');
 
 
 /**
- * @api {get} /hello-world
+ * @api {get} /hello-world Hello World
  * @apiGroup Basic
  * @apiDescription Teste da pagina 'olá mundo'.
  *
@@ -77,7 +77,7 @@ $router->get(URL_HELLO_WORLD, 'Controller@helloWorld');
  */
 
 /**
- * @api {get} /posts
+ * @api {get} /posts Obter todos os posts
  * @apiGroup Posts
  * @apiDescription Retorna uma lista de todos os posts, seus autores, seus comentários e os autores dos comentários.
  *
@@ -249,7 +249,7 @@ $router->get(URL_HELLO_WORLD, 'Controller@helloWorld');
 $router->get(URL_POSTS, 'PostController@getPosts');
 
 /**
- * @api {get} /posts/:id
+ * @api {get} /posts/:id Obter post por id
  * @apiGroup Posts
  * @apiDescription Retorna um único post identificado pelo id, seu autor, e uma lista de seus comentários e seus respectivos autores.
  *
@@ -354,7 +354,7 @@ $router->get(URL_POSTS, 'PostController@getPosts');
 $router->get(URL_POST_BY_ID, 'PostController@getPostById');
 
 /**
- * @api {post} /posts
+ * @api {post} /posts Salvar novo post
  * @apiGroup Posts
  * @apiDescription Cria um novo post. Deve ser informado um userId caso contrário deve ser informado um objeto(author) com os dados para cadastrar um novo usuário.
  *
